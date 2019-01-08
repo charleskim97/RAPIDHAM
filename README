@@ -1,0 +1,80 @@
+--DOCUMENTATION--
+
+RAPIDHAM v.1.0.0
+
+A prototype twitch chat bot for twitch.tv/ttvalvinuwu
+
+By: Charlie Kim
+
+Original Source Code @ https://pastebin.com/qTE6yRyf by Enderminecraft34
+
+1.0 SUMMARY & STEP-BY-STEP
+=======================================================================================================
+This bot is meant to be a prototype to gain experience in creating chat bots for Twitch. Currently, the
+only useful command is !rank which retrieves OSMS rankings.
+
+Currently the bot is functional, and the only thing that needs to be changed is which channel the bot 
+will enter, and the owner of the bot. 
+
+Disclaimer: This is my first attempt at a documentation, and I'm tired.
+
+Details:
+-------------------------------------------------------------------------------------------------------
+	Server Name: irc.twitch.tv
+	Port: 6667
+
+Preqrequisites:
+-------------------------------------------------------------------------------------------------------
+	1. Name of channel to join
+	2. Twitch account
+	3. OAuth token to use as password. Get it from here -> http://www.twitchapps.com/tmi/
+	4. Webdriver for a browser. Links here -> https://selenium-python.readthedocs.io/installation.html#drivers
+		-Webdrivers open a corresponding browser to retrieve the HTML data for !rank.
+		-Currently using, and recommend Firefox() with geckodriver.exe
+		-Place webdriver in bot folder, or PATH, or Firefox(path/to/webdriver)
+	5. Install Selenium (for javascript scraping + parsing):
+		$ pip install selenium
+
+
+Connecting bot to Twitch:
+-------------------------------------------------------------------------------------------------------
+	1. Enter bot name, owner name, OAuth token.
+	2. Select channel to send the bot to. 
+	3. Run script in shell
+
+Some command notes:
+-------------------------------------------------------------------------------------------------------
+	- The variable "message" contains the last message sent in chat
+	- To have the bot chat use sendMessage function:
+		sendMessage(s, "What the bot will say")
+
+2.0 OSMS Ranking
+=======================================================================================================
+Overview
+-------------------------------------------------------------------------------------------------------
+	- !rank player_char, returns the player_char's rank
+		- Also an emote based on rank
+
+
+	- OSMS uses javascript to visualize their rankings, i.e. requests library, urllib don't work
+		- This requires the selenium library to scrape the HTML
+	- Not the fastest, slight delay before message is sent, not awful though
+	
+
+Known Issues
+-------------------------------------------------------------------------------------------------------
+	- Will return only the first result -> works best if full character name is used
+	- Sometimes the search just fails for no reason, unsure why >_>.
+	- As OSMS uses an image to represent top 3 players, it doesn't work on aformentioned toons. (LOL)
+		- Would require to add another search query, but the current one isn't even that reliable.
+	- Sometimes queries take slightly longer for no good reason. 
+
+Possible Features
+-------------------------------------------------------------------------------------------------------
+	- Top 10 rankers
+	- Search by level
+	- Job rank
+
+
+
+
